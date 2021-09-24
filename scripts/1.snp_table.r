@@ -160,6 +160,9 @@ data_add$AmA_pos[data_add$Gene=="nsp12_2"] <- data_add$AmA_pos[data_add$Gene=="n
 data_add$Gene[data_add$Gene=='nsp12_2'] <- "nsp12"
 data_add <- data_add %>% select(Position, Gene, AmA_pos, everything()) %>% arrange(as.numeric(Position))
 
+# polish based on experience
+data_add <- data_add %>% filter(!(Gene=="S" & AmA_pos==156 & !grepl("DEL", codon_alt))) # this mutation is not a SNV, it is instead caused by deletion of 156-157, it is actually a R158G mutation.
+
 writexl::write_xlsx(data_add, "../results/data_add.xlsx")
 
 data_snvs <- data_add %>% filter(!grepl("DEL", codon_alt))
