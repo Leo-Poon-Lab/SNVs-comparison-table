@@ -68,6 +68,7 @@ df_primers$stop <- sapply(df_primers$Position, function(x){
 df_ann$IN_PRIMER <- sapply(df_ann$X2, function(x){
 	any((x <= df_primers$stop) & (x >= df_primers$start))
 })
+# df_ann %>% filter(IN_PRIMER)
 df_ann <- df_ann %>% filter(!IN_PRIMER)
 
 unique(df_ann$effect)
